@@ -36,19 +36,19 @@ class Do {
   }
 
   initProject() {
-    fs.mkdirSync('../src');
+    fs.mkdirSync('./src');
 
-    fs.mkdirSync('../src/actions');
-    fs.createReadStream('templates/actions-index.js').pipe(fs.createWriteStream('../src/actions/index.js'));
-    fs.createReadStream('templates/actions-types.js').pipe(fs.createWriteStream('../src/actions/types.js'));
+    fs.mkdirSync('./src/actions');
+    fs.createReadStream(__dirname + '/templates/actions-index.js').pipe(fs.createWriteStream('./src/actions/index.js'));
+    fs.createReadStream(__dirname + '/templates/actions-types.js').pipe(fs.createWriteStream('./src/actions/types.js'));
 
-    fs.mkdirSync('../src/reducers');
-    fs.createReadStream('templates/reducers-index.js').pipe(fs.createWriteStream('../src/reducers/index.js'));
+    fs.mkdirSync('./src/reducers');
+    fs.createReadStream(__dirname + '/templates/reducers-index.js').pipe(fs.createWriteStream('./src/reducers/index.js'));
 
-    fs.mkdirSync('../src/scenes');
+    fs.mkdirSync('./src/scenes');
 
-    fs.createReadStream('templates/app.js').pipe(fs.createWriteStream('../src/App.js'));
-    fs.createReadStream('templates/router.js').pipe(fs.createWriteStream('../src/Router.js'));
+    fs.createReadStream(__dirname + '/templates/app.js').pipe(fs.createWriteStream('./src/App.js'));
+    fs.createReadStream(__dirname + '/templates/router.js').pipe(fs.createWriteStream('./src/Router.js'));
   }
 
   addScene(rl) {
