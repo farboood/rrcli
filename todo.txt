@@ -1,0 +1,2 @@
+- ability to add component
+- remove "scene, action, reducer" from end of file name.
