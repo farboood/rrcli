@@ -60,28 +60,28 @@ class Do {
       let fileReplace = '';
 
       // scenes
-      fileDir = '../src/scenes/' + upperName + 'Scene.js';
-      fileResult = fs.readFileSync('templates/scenes-new.js', 'utf8');
+      fileDir = './src/scenes/' + upperName + 'Scene.js';
+      fileResult = fs.readFileSync(__dirname + '/templates/scenes-new.js', 'utf8');
       fileResult = fileResult.replace(/{name}/g, name).replace(/{upperName}/g, upperName);
       fs.writeFileSync(fileDir, fileResult, 'utf8');
 
       // actions
-      fileDir = '../src/actions/' + upperName + 'Actions.js';
-      fs.createReadStream('templates/actions-new.js').pipe(fs.createWriteStream(fileDir));
+      fileDir = './src/actions/' + upperName + 'Actions.js';
+      fs.createReadStream(__dirname + '/templates/actions-new.js').pipe(fs.createWriteStream(fileDir));
 
       // reducers
-      fileDir = '../src/reducers/' + upperName + 'Reducer.js';
-      fs.createReadStream('templates/reducers-new.js').pipe(fs.createWriteStream(fileDir));
+      fileDir = './src/reducers/' + upperName + 'Reducer.js';
+      fs.createReadStream(__dirname + '/templates/reducers-new.js').pipe(fs.createWriteStream(fileDir));
 
       // actions index
-      fileDir = "../src/actions/index.js";
+      fileDir = "./src/actions/index.js";
       fileResult = fs.readFileSync(fileDir, 'utf8');
       fileReplace = "export * from './" + upperName + "Actions';\n/* new action export */";
       fileResult = fileResult.replace('/* new action export */', fileReplace);
       fs.writeFileSync(fileDir, fileResult, 'utf8');
 
       // reducers index
-      fileDir = "../src/reducers/index.js";
+      fileDir = "./src/reducers/index.js";
       fileResult = fs.readFileSync(fileDir, 'utf8');
       fileReplace = "import " + upperName + "Reducer from './" + upperName + "Reducer';\n/* new reducer import */";
       fileResult = fileResult.replace('/* new reducer import */', fileReplace);
@@ -90,7 +90,7 @@ class Do {
       fs.writeFileSync(fileDir, fileResult, 'utf8');
 
       // router
-      fileDir = "../src/Router.js";
+      fileDir = "./src/Router.js";
       fileResult = fs.readFileSync(fileDir, 'utf8');
       fileReplace = "import " + upperName + "Scene from './scenes/" + upperName + "Scene';\n/* new scene import */";
       fileResult = fileResult.replace('/* new scene import */', fileReplace);
@@ -131,7 +131,7 @@ class Do {
         let fileReplace = '';
 
         // scene
-        fileDir = '../src/scenes/' + upperSceneName + 'Scene.js';
+        fileDir = './src/scenes/' + upperSceneName + 'Scene.js';
         fileResult = fs.readFileSync(fileDir, 'utf8');
         fileReplace = actionName + ",\n\t/* new action import */";
         fileResult = fileResult.replace('/* new action import */', fileReplace);
@@ -140,7 +140,7 @@ class Do {
         fs.writeFileSync(fileDir, fileResult, 'utf8');
 
         // action
-        fileDir = '../src/actions/' + upperSceneName + 'Actions.js';
+        fileDir = './src/actions/' + upperSceneName + 'Actions.js';
         fileResult = fs.readFileSync(fileDir, 'utf8');
         fileReplace = upperFunctionType + ",\n\t/* new type import */";
         fileResult = fileResult.replace('/* new type import */', fileReplace);
@@ -157,7 +157,7 @@ class Do {
         fs.writeFileSync(fileDir, fileResult, 'utf8');
 
         // reducer
-        fileDir = '../src/reducers/' + upperSceneName + 'Reducer.js';
+        fileDir = './src/reducers/' + upperSceneName + 'Reducer.js';
         fileResult = fs.readFileSync(fileDir, 'utf8');
         fileReplace = upperFunctionType + ",\n\t/* new type import */";
         fileResult = fileResult.replace('/* new type import */', fileReplace);
@@ -169,7 +169,7 @@ class Do {
         fs.writeFileSync(fileDir, fileResult, 'utf8');
 
         // type
-        fileDir = '../src/actions/types.js';
+        fileDir = './src/actions/types.js';
         fileResult = fs.readFileSync(fileDir, 'utf8');
         fileReplace = "export const " + upperFunctionType + " = '" + functionType + "';\n/* new type export */";
         fileResult = fileResult.replace('/* new type export */', fileReplace);
