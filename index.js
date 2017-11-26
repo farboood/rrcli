@@ -23,7 +23,7 @@ const rl = readline.createInterface({
  * Header Message
  * ===============
  */
-console.log('Folder Command-Line');
+console.log('React-Native Redux Command-Line');
 console.log('===================');
 console.log('');
 

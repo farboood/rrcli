@@ -6,6 +6,11 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import {
+  /* new subScene import */
+} from '../subScenes';
+import {
+} from '../components';
+import {
   /* new action import */
 } from '../actions';
 

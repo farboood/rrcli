@@ -1,10 +1,15 @@
 /*
  * ===============
- * Modules Import
+ *  Modules Import
  * ===============
  */
 const fs = require('fs');
 
+/*
+ * ===============
+ *  Class Do
+ * ===============
+ */
 class Do {
   constructor() {
 
@@ -14,7 +19,9 @@ class Do {
     return [
       { id: 1, name: "Init Project" },
       { id: 2, name: "Add Scene" },
-      { id: 3, name: "Add addFunction" }
+      { id: 3, name: "Add Function" },
+      { id: 4, name: "Add Subscene" },
+      { id: 5, name: "Add Component" }
     ];
   }
 
@@ -28,6 +35,12 @@ class Do {
         break;
       case 3:
         this.addFunction(rl);
+        break;
+      case 4:
+        this.addSubScene(rl);
+        break;
+      case 5:
+        this.addComponent(rl);
         break;
       default:
         console.log('wrong action id');
@@ -44,6 +57,12 @@ class Do {
 
     fs.mkdirSync('./src/reducers');
     fs.createReadStream(__dirname + '/templates/reducers-index.js').pipe(fs.createWriteStream('./src/reducers/index.js'));
+
+    fs.mkdirSync('./src/subscenes');
+    fs.createReadStream(__dirname + '/templates/subScenes-index.js').pipe(fs.createWriteStream('./src/subScenes/index.js'));
+
+    fs.mkdirSync('./src/components');
+    fs.createReadStream(__dirname + '/templates/components-index.js').pipe(fs.createWriteStream('./src/components/index.js'));
 
     fs.mkdirSync('./src/scenes');
 
@@ -177,6 +196,70 @@ class Do {
 
         rl.close();
       });
+    });
+  }
+
+  addSubScene(rl) {
+    rl.question('Scene Name : ', answer => {
+      const sceneName = answer;
+      const upperSceneName = sceneName.charAt(0).toUpperCase() + sceneName.slice(1);
+      rl.pause();
+
+      rl.question('SubScene Name : ', answer => {
+        const subSceneName = answer;
+        const upperSubSceneName = subSceneName.charAt(0).toUpperCase() + subSceneName.slice(1);
+        const fullSubSceneName = upperSceneName + upperSubSceneName;
+        let fileDir = '';
+        let fileResult = '';
+        let fileReplace = '';
+
+        // subScenes
+        fileDir = './src/subScenes/' + fullSubSceneName + 'SubScene.js';
+        fileResult = fs.readFileSync(__dirname + '/templates/subScenes-new.js', 'utf8');
+        fileResult = fileResult.replace(/{upperName}/g, fullSubSceneName);
+        fs.writeFileSync(fileDir, fileResult, 'utf8');
+
+        // scene
+        fileDir = './src/scenes/' + upperSceneName + 'Scene.js';
+        fileResult = fs.readFileSync(fileDir, 'utf8');
+        fileReplace = fullSubSceneName + 'SubScene as ' + fullSubSceneName + ",\n\t/* new subScene import */";
+        fileResult = fileResult.replace('/* new subScene import */', fileReplace);
+        fs.writeFileSync(fileDir, fileResult, 'utf8');
+
+        // subScenes index
+        fileDir = "./src/subScenes/index.js";
+        fileResult = fs.readFileSync(fileDir, 'utf8');
+        fileReplace = "export * from './" + fullSubSceneName + "SubScene';\n/* new subScene export */";
+        fileResult = fileResult.replace('/* new subScene export */', fileReplace);
+        fs.writeFileSync(fileDir, fileResult, 'utf8');
+
+        rl.close();
+      });
+    });
+  }
+
+  addComponent(rl) {
+    rl.question('Component Name : ', answer => {
+      const componentName = answer;
+      const upperComponentName = componentName.charAt(0).toUpperCase() + componentName.slice(1);
+      let fileDir = '';
+      let fileResult = '';
+      let fileReplace = '';
+
+      // components
+      fileDir = './src/components/' + upperComponentName + 'Component.js';
+      fileResult = fs.readFileSync(__dirname + '/templates/components-new.js', 'utf8');
+      fileResult = fileResult.replace(/{upperName}/g, upperComponentName);
+      fs.writeFileSync(fileDir, fileResult, 'utf8');
+
+      // components index
+      fileDir = "./src/components/index.js";
+      fileResult = fs.readFileSync(fileDir, 'utf8');
+      fileReplace = "export * from './" + upperComponentName + "Component';\n/* new component export */";
+      fileResult = fileResult.replace('/* new component export */', fileReplace);
+      fs.writeFileSync(fileDir, fileResult, 'utf8');
+
+      rl.close();
     });
   }
 }

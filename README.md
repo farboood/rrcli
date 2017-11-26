@@ -4,21 +4,21 @@ command-line for work with react-native and redux.
 
 ## When need
 
-if the tree of react-native project be something like this:
-.
-+-- src
-|   +-- actions
-|   |   +-- index.js
-|   |   +-- types.js
-|   |   +-- ...
-|   +-- reducers
-|   |   +-- index.js
-|   |   +-- ...
-|   +-- scenes
-|   +-- router.js
-|   +-- app.js
-+-- index.android.js
-+-- index.ios.js
+if the tree of react-native project be something like this: \n
+. \n
++-- src \n
+|   +-- actions \n
+|   |   +-- index.js \n
+|   |   +-- types.js \n
+|   |   +-- ... \n
+|   +-- reducers \n
+|   |   +-- index.js \n
+|   |   +-- ... \n
+|   +-- scenes \n
+|   +-- router.js \n
+|   +-- app.js \n
++-- index.android.js \n
++-- index.ios.js \n
 
 ## Installation
 
