@@ -4,21 +4,30 @@ command-line for work with react-native and redux.
 
 ## When need
 
-if the tree of react-native project be something like this: \n
-. \n
-+-- src \n
-|   +-- actions \n
-|   |   +-- index.js \n
-|   |   +-- types.js \n
-|   |   +-- ... \n
-|   +-- reducers \n
-|   |   +-- index.js \n
-|   |   +-- ... \n
-|   +-- scenes \n
-|   +-- router.js \n
-|   +-- app.js \n
-+-- index.android.js \n
-+-- index.ios.js \n
+if the tree of react-native project be something like this:
+
+    .
+    ├── ...
+    ├── src
+    │   ├── actions
+    │   │   ├── index.js
+    │   │   ├── types.js
+    │   │   └── ...               # actions
+    │   ├── reducers
+    │   │   ├── index.js
+    │   │   └── ...               # reducers
+    │   ├── scenes
+    │   │   └── ...               # scenes
+    │   ├── subScenes
+    │   │   ├── index.js
+    │   │   └── ...               # subScenes
+    │   ├── components
+    │   │   ├── index.js
+    │   │   └── ...               # components
+    │   ├── Router.js
+    │   └── App.js
+    ├── index.js
+    └── ...
 
 ## Installation
 
@@ -28,14 +37,15 @@ npm install -g rrcli
 
 ## Usage
 
-if choose 1:
-  will make src folder with files
+When run rrcli in terminal you have 5 options to choose:
 
-if choose 2:
-  get a name and create scene for it and update actions and reducers with new scene.
+* 1 : The first time you use rrcli make sure you run this command to init project. This make src folder and some other stuff.
 
-  issue: router file not receive changes in this version.
+* 2 : Create Scene and update actions and reducers with new scene.
+  Issue: Router files not receive full change in this version.
 
-if choose 3:
-  get scene name and function name, then create new function and add that to actions and reducer and scene.
-  the name of function must separate only with underline.
+* 3 : Create function for specific scene. This command add action and reducer, and update scene to receive this action. (The name of function must separate only with underline.)
+
+* 4 : Create subScene for specific scene.
+
+* 5 : Create component.
